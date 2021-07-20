@@ -31,7 +31,12 @@ public class ForegroundService extends Service {
 
         // Delete notification channel if it already exists
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.deleteNotificationChannel("foreground.service.channel");
+        
+        try {
+          manager.deleteNotificationChannel("foreground.service.channel");
+        } catch (Exception e) {
+          Log.e("#ForegroundService#", e.toString());
+        }
 
         // Get notification channel importance
         Integer importance;
