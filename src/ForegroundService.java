@@ -14,15 +14,18 @@ import android.util.Log;
 public class ForegroundService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        if (intent.getAction().equals("start")) {
-            // Start the service
-            startPluginForegroundService(intent.getExtras());
-        } else {
-            // Stop the service
-            stopForeground(true);
-            stopSelf();
+        try {
+            if (intent.getAction().equals("start")) {
+                // Start the service
+                startPluginForegroundService(intent.getExtras());
+            } else {
+                // Stop the service
+                stopForeground(true);
+                stopSelf();
+            }
+        } catch (Exception e) {
+            Log.e("#ForegroundService#", e.toString());
         }
-
         return START_STICKY;
     }
 
